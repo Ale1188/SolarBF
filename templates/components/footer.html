@@ -1,0 +1,15 @@
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="footer-container">
+    <footer>
+        <p>Alejandro Barragan © 2024</p>
+        <a class="footer-link" href="{% url 'about' %}">About us</a>
+        <a class="footer-link" href="{% url 'contact' %}">Contact us</a>
+    </footer>
+</div>
+{% endblock %}

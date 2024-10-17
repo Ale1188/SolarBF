@@ -1,0 +1,69 @@
+
+to create a branch
+MAC & Windowns: git checkout -b "BRANCH_NAME"
+
+to move to a branch
+MAC & Windows: git checkout "BRANCH_NAME"
+
+create a virtual environment:
+MAC: python3 -m venv venv
+Windows: py -m venv venv
+
+activate the virtual environment
+MAC: source venv/bin/activate
+Windows: venv/Scripts/activate
+
+to deactivate the virtual environment
+MAC & Windows: deactivate
+
+installing django
+MAC: python3 -m pip install django
+Windows: pip install django
+
+create django project
+MAC & Windows: django-admin startproject config .
+
+run django project
+MAC: python3 manage.py runserver
+Windows: py manage.py runserver
+
+create django apps
+MAC: python3 manage.py startapp APP_NAME
+Windows: py manage.py startapp APP_NAME
+Note: for each app that you create, you need to specify it in settings.py
+
+#Settings.py file
+add templates folder
+import os
+'DIRS':[os.path.join(BASE_DIR, 'templates')],
+
+add static variable for static files
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
+MEDIA_URL = 'media/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+add bootstrap and crispy forms
+MAC: python3 -m pip install django-bootstrap-v5
+MAC: python3 -m pip install django-crispy-forms
+MAC: python3 -m pip install crispy-bootstrap5
+Windows: pip install django-bootstrap-v5
+Windows: pip install django-crispy-forms
+Windows: pip install crispy-bootstrap5
+
+add to INSTALLED_APPS:
+'bootstrap5',
+'crispy_forms',
+'crispy_bootstrap5',
+
+add variables:
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+django migration (creating models / DB)
+python3 manage.py makemigrations //Identify the changes
+python3 manage.py migrate //Apply changes
+
+create superuser for admin site
+python3 manage.py createsuperuser
