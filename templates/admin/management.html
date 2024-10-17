@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Admin Management {% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/management.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="management">
+    <h2>Admin Management</h2>
+    <ul>
+        <li><a href="{% url 'add_product' %}">Add Product</a></li>
+        <li><a href="{% url 'categories' %}">View Categories</a></li>
+        <li><a href="{% url 'add_category' %}">Add Category</a></li>
+    </ul>
+</div>
+{% endblock %}

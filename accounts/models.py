@@ -22,7 +22,7 @@ class CustomUser(AbstractUser):
         ('admin', 'Admin'),
     )
 
-    role = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='user')
+    role = models.CharField(max_length=10, default='user')
 
     team = models.ForeignKey(
         Team,
@@ -30,6 +30,8 @@ class CustomUser(AbstractUser):
         blank=True, null=True,
         related_name='members'
     )
+
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.username

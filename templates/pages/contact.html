@@ -8,5 +8,26 @@
 {% endblock %}
 
 {% block content %}
-    <h3 class="example-h3">It Works!</h3>
+<section class="contact-section center-column">
+
+    <form id="emailForm" method="POST" action="." class="center-column">
+
+        <h1>Contact Us</h1>
+        <h2>Use the form below to say <span>Hi</span>!</h2>
+
+        {% csrf_token %}
+
+        {{ form.name }}
+        {{ form.email }}
+        {{ form.message }}
+
+        <button class="btn btn-success">Send message</button>
+
+    </form>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/contact.js' %}"></script>
 {% endblock %}

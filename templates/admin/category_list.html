@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Category List{% endblock %}
+
+{% block content %}
+<h2>Categories</h2>
+<ul>
+    {% for category in categories %}
+        <li>{{ category.name }}: {{ category.description }}</li>
+    {% empty %}
+        <li>No categories available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

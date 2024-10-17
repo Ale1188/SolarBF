@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product-item">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p> $ {{ product.price }}</p>
+                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#productModal{{ forloop.counter }}">See more</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="productModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="productModalLabel{{ forloop.counter }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productModalLabel{{ forloop.counter }}">{{ product.name }}</h5>
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button> -->
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                                </div>
+                                <div class="col-md-6 info">
+                                    <p><strong>Price:</strong> ${{ product.price }}</p>
+                                    <p><strong>Category:</strong> {{ product.category.name }}</p>
+                                    <p><strong>Stock:</strong> {{ product.stock }}</p>
+                                    <p><strong>Description:</strong> {{ product.description }}</p>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="{% url 'cart' %}" class="btn btn-sm btn-success">Add cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No products available.</p>
+        {% endfor %}
+    </div>
+    {% else %}
+        <script>
+            window.location.href = "{% url 'home' %}";
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'plugins/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap.min.js' %}"></script>
+{% endblock %}

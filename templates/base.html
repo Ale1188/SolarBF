@@ -18,10 +18,8 @@
 
     {% include 'components/navbar.html' %}
 
-    <div class="container-fluid content">
         {% block content %}
         {% endblock %}
-    </div>
     
     {% include 'components/footer.html' %}
     
@@ -30,3 +28,6 @@
 </body>
 
 </html>
+
+{% block scripts %}
+{% endblock %}

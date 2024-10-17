@@ -16,7 +16,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_images/', blank=True, null=True)
+    image = models.ImageField(upload_to='product_images/', blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

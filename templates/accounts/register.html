@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %} Register {% endblock %}
 
@@ -9,10 +10,10 @@
     <h2>Register</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        {{ form|crispy }}
+        <button class="btn btn-sm btn-success" type="submit">Register</button>
     </form>
-    Already have an account? <a href="{% url 'login' %}" class="btn btn-primary">Click here</a> to login.
+    Already have an account? <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Click here</a> to login.
 </div>
 
 {% endblock %}

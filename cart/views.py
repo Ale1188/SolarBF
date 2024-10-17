@@ -10,4 +10,4 @@ def cart_view(request):
         'total_price': total_price
     }
     
-    return render(request, 'pages/cart.html', context)
+    return render(request, 'store/cart.html', context)

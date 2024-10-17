@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add products{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/add_products.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add New Product</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="error-message">
+                {{ field.errors }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Add Product</button>
+    </form>
+</div>
+{% endblock %}

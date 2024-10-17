@@ -8,11 +8,44 @@
 {% endblock %}
 
 {% block content %}
-    <div class="home">
-
-        <h1>Welcome</h1>
-
-        <div class="main-section">
+    <div class="home-container">
+        <div class="home-info">
+            <div class="info-text">
+                <h2>Welcome</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint mollitia impedit soluta, nobis accusamus culpa nemo. Ipsam blanditiis vitae incidunt eum quisquam. Minus rerum deserunt provident quaerat quam, debitis unde perferendis repudiandae, explicabo dolorum facere quae, modi commodi repellendus repellat accusamus! Suscipit, laudantium voluptatum cum iure consectetur optio tenetur assumenda!.</p>
+                <a href="{% url 'about' %}" class="info-button">See more</a>
+            </div>
+            <div class="info-image">
+                <img src="https://img.freepik.com/premium-photo/large-solar-panel-is-mounted-metal-frame-grassy-field_604472-12474.jpg" alt="Descripción de la imagen">
+            </div>
+        </div>
+        <div class="home-prod">
+            <h2 class="section-title">Some of our Products</h2>
+            <div class="products-grid">
+                {% for product in products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        {% if product.image and product.image.url %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                        <p class="price">${{ product.price }}</p>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'cart' %}" class="buy-button">Add cart</a>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={{ request.path }}" class="buy-button">Add cart</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="home-com">
 
         </div>
 
@@ -20,6 +53,6 @@
     
 {% endblock %}
 
-<!-- {% block scripts %}
+{% block scripts %}
 
-{% endblock %} -->
+{% endblock %}
