@@ -11,7 +11,7 @@
     padding: 40px;
     background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .info-text {
@@ -42,8 +42,7 @@
     text-decoration: none;
 }
 
-.info-button:hover,
-.buy-button:hover {
+.info-button:hover, .buy-button:hover {
     background-color: #4CAF50;
     text-decoration: none;
     color: white;
@@ -57,12 +56,13 @@
     width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* Products section */
 .home-prod {
     padding: 40px 0;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -75,9 +75,9 @@
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajustado para columnas más flexibles */
-    gap: 20px; /* Reducción del espacio entre tarjetas */
-    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
 }
 
 .product-card {
@@ -86,12 +86,12 @@
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* max-width: 300px; Eliminar para flexibilidad */
+    max-width: 300px;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .product-image {
@@ -190,12 +190,15 @@
     }
 }
 
+/* .com-carousel:hover .com-track {
+    animation-play-state: paused;
+} */
+
 /* Responsive */
 @media (max-width: 768px) {
     .home-info {
         flex-direction: column;
         text-align: center;
-        padding: 20px; /* Ajusta el padding para móviles */
     }
 
     .info-text {
@@ -205,28 +208,24 @@
     .info-image {
         order: 1;
         margin-bottom: 20px;
-        flex: 1 0 100%; /* Hacer la imagen 100% en móviles */
     }
 
     .info-text h2 {
-        font-size: 2rem; /* Reduce el tamaño de la fuente para h2 */
+        font-size: 2rem;
     }
 
     .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta para pantallas más pequeñas */
-        gap: 10px; /* Reducción de espacio entre tarjetas */
-    }
-
-    .product-card {
-        padding: 10px; /* Menos padding en móviles */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 10px;
     }
 
     .com-slide {
-        flex: 0 0 120px; /* Ajuste del tamaño del slide */
+        flex: 0 0 150px;
     }
 
     .com-track {
-        width: calc(120px * 16); /* Cambia el tamaño del carrusel */
+        width: calc(150px * 16);
     }
 
     @keyframes scroll {
@@ -234,7 +233,7 @@
             transform: translateX(0);
         }
         100% {
-            transform: translateX(calc(-120px * 8));
+            transform: translateX(calc(-150px * 8));
         }
     }
 }
