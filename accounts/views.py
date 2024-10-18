@@ -46,8 +46,10 @@ def profileView_update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
-            if form.cleaned_data['password']:
-                user.set_password(form.cleaned_data['password'])
+            password = form.cleaned_data.get('password')
+            if password:
+                user.set_password(password)
+                return redirect('profile')
             user.save()
             return redirect('profile')
     else:

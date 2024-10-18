@@ -19,6 +19,12 @@ class CustomUserChangeForm(UserChangeForm):
     address = forms.CharField(max_length=255, required=False, help_text='Optional')
     password = forms.CharField(widget=forms.PasswordInput(), required=False, help_text='Leave blank if not changing')
 
-    class Meta(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'address', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email', 'address')
+
+    def clean_password(self):
+        password = self.cleaned_data.get("password")
+        if password == "":
+            return None
+        return password
