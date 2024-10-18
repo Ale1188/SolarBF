@@ -1,0 +1,104 @@
+.register {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.register h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Estilos para los campos del formulario generados por crispy-forms */
+.register .form-group {
+    margin-bottom: 1rem;
+}
+
+.register .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.register .form-control:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}
+
+.register label {
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.register button {
+    background-color: #28a745;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.register button:hover {
+    background-color: #218838;
+}
+
+.register a.btn {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Estilos para el texto y enlace de "Already have an account" */
+.register > :last-child {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+.register .btn-primary {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.register .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para mensajes de error */
+.register .alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.register .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}

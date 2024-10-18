@@ -13,10 +13,11 @@
             <div class="nav-links" id="nav-links">
                 {% if user.is_authenticated %}
                     {% if user.is_staff or user.role == 'worker' %}
-                        <a class="nav-link" href="{% url 'management' %}">Admin Management</a>
+                        <a class="nav-link btn-sm" href="{% url 'management' %}">Admin Management</a>
                     {% endif %}
-                    <a class="nav-link" href="{% url 'products' %}">Products</a>
-                    <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+                    <a class="nav-link btn-sm" href="{% url 'products' %}">Products</a>
+                    <a class="nav-link btn-sm" href="{% url 'cart' %}">Cart</a>
+                    <a class="nav-link btn-sm" href="{% url 'profile' %}">profile</a>
                     <a class="nav-link btn-nav logout-btn" href="{% url 'logout' %}">Logout</a>
                 {% else %}
                     <a class="nav-link btn-nav login-btn" href="{% url 'login' %}">Login</a>

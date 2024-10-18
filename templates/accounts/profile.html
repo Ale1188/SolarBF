@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Profile {{ user.username }}</h1>
+    <div class="profile-info">
+        <p><strong>Firstname:</strong> {{ user.first_name }}</p>
+        <p><strong>Lastname:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+    </div>
+    <div class="profile-actions">
+        <a href="{% url 'profileUpdate' %}">Update profile</a>
+    </div>
+</div>
+{% endblock %}

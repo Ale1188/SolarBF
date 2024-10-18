@@ -4,10 +4,10 @@
 ## Project Structure
 
 ```
-ProjectX/
+SolarBF/
 │
 ├── manage.py
-├── ProjectX/
+├── config/
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
@@ -66,7 +66,7 @@ ProjectX/
 ### 3. **products**
 - **Functionality**: Manages the products sold in the store.
 - **Models**:
-  - `Product`: Information about the products, including `name`, `description`, `price`, `image`, etc.
+  - `Product`: Information about the products, including `name`, `description`, `price`, `image`, `stock`, etc.
 
 ### 4. **cart**
 - **Functionality**: Manages the shopping cart for users, allowing products to be added, removed, and managed in the cart.

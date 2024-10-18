@@ -10,10 +10,43 @@
 {% block content %}
 <div class="management">
     <h2>Admin Management</h2>
-    <ul>
-        <li><a href="{% url 'add_product' %}">Add Product</a></li>
-        <li><a href="{% url 'categories' %}">View Categories</a></li>
-        <li><a href="{% url 'add_category' %}">Add Category</a></li>
-    </ul>
+    <div class="management-grid">
+
+        <div class="management-card">
+            <div class="icon">📦</div>
+            <h3>Product</h3>
+            <p>View and manage product</p>
+            <a href="{% url 'product_list' %}">View Products</a>
+        </div>
+        <div class="management-card">
+            <div class="icon">📋</div>
+            <h3>Categories</h3>
+            <p>View and manage product categories</p>
+            <a href="{% url 'categories' %}">View Categories</a>
+        </div>
+        <div class="management-card">
+            <div class="icon">➕</div>
+            <h3>Add Product</h3>
+            <p>Add new products to your inventory</p>
+            <a href="{% url 'add_product' %}">Add Product</a>
+        </div>
+        <div class="management-card">
+            <div class="icon">➕</div>
+            <h3>New Category</h3>
+            <p>Create a new product category</p>
+            <a href="{% url 'add_category' %}">Add Category</a>
+        </div>
+        <div class="management-card">
+            <div class="icon">🛒</div>
+            <h3>Orders</h3>
+            <p>Check nee orders</p>
+            <a href="{% url 'orders' %}">View</a>
+        </div>
+    </div>
+</div>
+<div class="button-container">
+    <a href="{% url 'home' %}" class="btn btn-sm btn-primary">
+        <i class="fa-solid fa-house"></i> Go Home
+    </a>
 </div>
 {% endblock %}

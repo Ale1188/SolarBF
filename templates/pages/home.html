@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="home-prod">
-            <h2 class="section-title">Some of our Products</h2>
+            <h2 class="section-title">Some of our products</h2>
             <div class="products-grid">
                 {% for product in products %}
                 <div class="product-card">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="product-info">
                         <h3>{{ product.name }}</h3>
-                        <p>{{ product.description }}</p>
+                        <!-- <p>{{ product.description }}</p> -->
                         <p class="price">${{ product.price }}</p>
                         {% if user.is_authenticated %}
                             <a href="{% url 'cart' %}" class="buy-button">Add cart</a>

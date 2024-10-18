@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Add products{% endblock %}
+{% block title %}Edit Category{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/add_products.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/edit_category.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/forms.css' %}"/>
 {% endblock %}
 
 {% block content %}
 <div class="form-container">
-    <h2>Add New Product</h2>
+    <h2>Edit category</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
@@ -24,7 +24,7 @@
             {% endif %}
         </div>
         {% endfor %}
-        <button type="submit" class="submit-button">Add product</button>
+        <button type="submit" class="submit-button">Save</button>
     </form>
     <div class="button-container">
         <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>

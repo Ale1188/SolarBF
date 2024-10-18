@@ -3,13 +3,28 @@
 
 {% block title %}Category List{% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/category_list.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
+{% endblock %}
+
 {% block content %}
-<h2>Categories</h2>
-<ul>
+<div class="cardb-list">
     {% for category in categories %}
-        <li>{{ category.name }}: {{ category.description }}</li>
+        <div class="cardb-item">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description }}</p>
+            <a href="{% url 'edit_category' category.id %}" class="btn btn-sm btn-primary" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+            <form method="POST" action="{% url 'delete_category' category.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?');" title="Delete"><i class="fa-solid fa-trash"></i></button>
+            </form>
+        </div>
     {% empty %}
-        <li>No categories available.</li>
+        <p>No categories available.</p>
     {% endfor %}
-</ul>
+</div>
+<div class="button-container">
+    <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
+</div>
 {% endblock %}

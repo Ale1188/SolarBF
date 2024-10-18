@@ -4,6 +4,10 @@
 
 {% block title %} Register {% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}"/>
+{% endblock %}
+
 {% block content %}
 
 <div class="register">
@@ -13,7 +17,7 @@
         {{ form|crispy }}
         <button class="btn btn-sm btn-success" type="submit">Register</button>
     </form>
-    Already have an account? <a href="{% url 'login' %}" class="btn btn-sm btn-primary">Click here</a> to login.
+    Already have an account? <a href="{% url 'login' %}" class="btn btn-sm btn-primary center-content">Click here</a> to login.
 </div>
 
 {% endblock %}
