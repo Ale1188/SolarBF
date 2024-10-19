@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="checkout-summary">
+    <h2>Checkout Summary</h2>
+    <h4 class="total-amount">Total: ${{ cart_total|floatformat:2 }}</h4>
+    <h5>Discount: ${{ coupon_discount|floatformat:2 }}</h5>
+    <h3 class="final-total">Final Total: ${{ final_total|floatformat:2 }}</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="confirm-checkout-button">Confirm Checkout</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- <script src="{% static '' %}"></script> -->
+{% endblock %}

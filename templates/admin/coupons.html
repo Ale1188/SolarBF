@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Coupons{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/coupon.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <h1>Coupon List</h1>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Valid From</th>
+            <th>Valid To</th>
+            <th>Uses</th>
+            <th>Max Uses</th>
+        </tr>
+        {% for coupon in coupons %}
+            <tr>
+                <td>{{ coupon.code }}</td>
+                <td>{{ coupon.discount_type }}</td>
+                <td>{{ coupon.discount_value }}</td>
+                <td>{{ coupon.valid_from }}</td>
+                <td>{{ coupon.valid_to }}</td>
+                <td>{{ coupon.uses }}</td>
+                <td>{{ coupon.max_uses }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="button-container">
+        <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
+    </div>
+{% endblock %}

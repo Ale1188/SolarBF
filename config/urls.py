@@ -23,10 +23,11 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("pages.urls")),
-    path("",include("products.urls")),
     path("",include("accounts.urls")),
+    path("products/",include("products.urls")),
     path("cart/",include("cart.urls")),
     path("orders/",include("orders.urls")),
+    # path("checkout/",include("payments.urls")),
 ]
 
 

@@ -1,7 +1,7 @@
-from .models import Product, Category
+from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import ProductForm, CategoryForm
+from .forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 
@@ -112,3 +112,18 @@ def delete_category(request, category_id):
     category.delete()
     messages.success(request, 'Category deleted successfully!')
     return redirect('category_list')
+
+@login_required
+def create_coupon(request):
+    if request.method == "POST":
+        form = CouponForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('coupon')
+    else:
+        form = CouponForm()
+    return render(request, 'admin/create_coupon.html', {'form': form})
+
+def coupon_list(request):
+    coupons = Coupon.objects.all()
+    return render(request, 'admin/coupons.html', {'coupons': coupons})

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Coupons{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Create Coupon</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error-message">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Save Coupon</button>
+    </form>
+    <div class="button-container">
+        <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
+    </div>
+</div>
+{% endblock %}

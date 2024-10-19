@@ -25,6 +25,12 @@
             <a href="{% url 'categories' %}">View Categories</a>
         </div>
         <div class="management-card">
+            <div class="icon">🏷️</div>
+            <h3>Coupons</h3>
+            <p>View and manage coupons</p>
+            <a href="{% url 'coupon' %}">View Coupons</a>
+        </div>
+        <div class="management-card">
             <div class="icon">➕</div>
             <h3>Add Product</h3>
             <p>Add new products to your inventory</p>
@@ -35,6 +41,12 @@
             <h3>New Category</h3>
             <p>Create a new product category</p>
             <a href="{% url 'add_category' %}">Add Category</a>
+        </div>
+        <div class="management-card">
+            <div class="icon">➕</div>
+            <h3>Add Coupons</h3>
+            <p>Create new coupons</p>
+            <a href="{% url 'create_coupon' %}">Add Coupons</a>
         </div>
         <div class="management-card">
             <div class="icon">🛒</div>

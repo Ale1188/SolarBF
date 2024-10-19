@@ -1,13 +1,76 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Shopping Cart{% endblock %}
+{% block title %}
+    Shopping Cart
+{% endblock %}
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}"/>
 {% endblock %}
 
 {% block content %}
-    <h1>Your Cart</h1>
-    
+    <div class="container-cart">
+        <div class="left-section">
+            <h1>Your Shopping Cart</h1>
+            {% if cart_items %}
+                <div class="cart-items">
+                {% for item in cart_items %}
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <span class="item-name">{{ item.product.name }}</span>
+                            <span class="item-price">${{ item.product.price }}</span>
+                            <span class="item-quantity">Cantidad: {{ item.quantity }}</span>
+                            <form action="{% url 'remove_from_cart' item.id %}" method="POST" class="remove-form">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-button">×</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-cart-message">
+                    <p>Tu carrito está vacío.</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="right-section">
+            <h2>Apply Coupon Code</h2>
+            <form method="post" class="coupon-form">
+                {% csrf_token %}
+                <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter your coupon code" required>
+                <button type="submit" class="coupon-button">Apply Coupon</button>
+            </form>
+        
+            {% if coupon_code %}
+                <div class="applied-coupon">
+                    <p class="coupon-message">
+                        Coupon applied: <strong>{{ coupon_code }}</strong>
+                        <form method="POST" action="{% url 'cart' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="remove_coupon" value="true">
+                            <button type="submit" class="remove-coupon-button">×</button>
+                        </form>
+                    </p>
+                </div>
+            {% endif %}
+        
+            <div class="discount-info">
+                <h5>Discount: ${{ coupon_discount|floatformat:2 }}</h5>
+                <h4 class="total-amount">Total: ${{ cart_total|floatformat:2 }}</h4>
+                <h3 class="final-total">Total after discount: ${{ final_total|floatformat:2 }}</h3>
+            </div>
+
+            <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="checkout-button">Proceed to Checkout</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+x

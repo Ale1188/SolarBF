@@ -1,6 +1,6 @@
 from django.db import models
 from accounts.models import CustomUser
-
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -32,3 +32,20 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.product.name}'
+
+class Coupon(models.Model):
+    COUPON_TYPE_CHOICES = (
+        ('percentage', 'Percentage Discount'),
+        ('fixed_amount', 'Fixed Amount Discount'),
+    )
+    
+    code = models.CharField(max_length=50, unique=True)
+    discount_type = models.CharField(max_length=15, choices=COUPON_TYPE_CHOICES)
+    discount_value = models.DecimalField(max_digits=10, decimal_places=2)
+    valid_from = models.DateTimeField(default=timezone.now)
+    valid_to = models.DateTimeField()
+    max_uses = models.PositiveIntegerField(default=1)
+    uses = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.code} - {self.discount_value} ({self.discount_type})"
