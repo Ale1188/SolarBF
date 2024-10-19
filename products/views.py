@@ -13,8 +13,6 @@ def productView(request):
         'products': products,
     })
 
-
-
 def is_staff_or_worker(user):
     return user.is_staff or user.role == 'worker' 
 
@@ -113,7 +111,16 @@ def delete_category(request, category_id):
     messages.success(request, 'Category deleted successfully!')
     return redirect('category_list')
 
+
+# Coupon
 @login_required
+@user_passes_test(is_staff_or_worker)
+def coupon_list(request):
+    coupons = Coupon.objects.all()
+    return render(request, 'admin/coupons.html', {'coupons': coupons})
+
+@login_required
+@user_passes_test(is_staff_or_worker)
 def create_coupon(request):
     if request.method == "POST":
         form = CouponForm(request.POST)
@@ -124,6 +131,34 @@ def create_coupon(request):
         form = CouponForm()
     return render(request, 'admin/create_coupon.html', {'form': form})
 
-def coupon_list(request):
-    coupons = Coupon.objects.all()
-    return render(request, 'admin/coupons.html', {'coupons': coupons})
+@login_required
+@user_passes_test(is_staff_or_worker)
+def delete_coupon(request, coupon_id):
+    coupon = Coupon.objects.get(id=coupon_id)
+    coupon.delete()
+    messages.success(request, 'Coupon deleted successfully!')
+    return redirect('coupon')
+
+@login_required
+@user_passes_test(is_staff_or_worker)
+def edit_coupon(request, coupon_id):
+    coupon = Coupon.objects.get(id=coupon_id)
+    coupon.delete()
+    messages.success(request, 'Coupon edit successfully!')
+    return redirect('coupon')
+
+@login_required
+@user_passes_test(is_staff_or_worker)
+def edit_coupon(request, coupon_id):
+    coupon = Coupon.objects.get(id=coupon_id)
+    
+    if request.method == 'POST':
+        form = CouponForm(request.POST, instance=coupon)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Coupon updated successfully!')
+            return redirect('coupon')
+    else:
+        form = CouponForm(instance=coupon)
+    
+    return render(request, 'admin/edit_coupon.html', {'form': form, 'coupon': coupon})

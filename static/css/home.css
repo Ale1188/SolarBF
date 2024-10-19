@@ -1,8 +1,5 @@
 .home-container {
-    /* max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    */
+
 }
 
 .home-info {
@@ -45,12 +42,14 @@
     text-decoration: none;
     position: relative;
     overflow: hidden;
+
 }
 
 .info-button:hover, .buy-button:hover {
     background-color: #4CAF50;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: white;
 }
 
 .info-image {

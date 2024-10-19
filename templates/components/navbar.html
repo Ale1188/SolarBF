@@ -9,7 +9,10 @@
 <div class="navbar-container">
     <nav class="navbar">
         <div class="container">
-            <a class="nav-link navbar-brand" href="{% url 'home' %}">SolarBF</a>
+            <a class="nav-link navbar-brand nav-logo" href="{% url 'home' %}">
+                <img src="{% static 'images/SolarBFLogo1-1.png' %}" alt="">
+            </a>
+            
             <div class="nav-links" id="nav-links">
                 {% if user.is_authenticated %}
                     {% if user.is_staff or user.role == 'worker' %}

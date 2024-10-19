@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/edit_coupon.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Edit Coupon</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="error-message">
+                {{ field.errors }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Save</button>
+    </form>
+    <div class="button-container">
+        <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
+    </div>
+</div>
+{% endblock %}

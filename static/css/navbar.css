@@ -69,6 +69,19 @@
     margin: 3px 0;
 }
 
+.nav-logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 5px 0;
+}
+
+.nav-logo img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -90,5 +103,9 @@
     .nav-toggle {
         display: flex;
         margin-left: auto;
+    }
+
+    .nav-logo img {
+        max-height: 32px; /* Logo más pequeño en móviles */
     }
 }

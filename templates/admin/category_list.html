@@ -9,6 +9,15 @@
 {% endblock %}
 
 {% block content %}
+<div class="button-container">
+    <a href="{% url 'management' %}" class="btn btn-sm btn-primary">
+        <i class="fa-solid fa-sliders"></i> Go to management
+    </a>
+    <a href="{% url 'add_category' %}" class="btn btn-sm btn-primary">
+        <i class="fa-solid fa-plus"></i> Add
+    </a>
+</div>
+
 <div class="cardb-list">
     {% for category in categories %}
         <div class="cardb-item">
@@ -23,8 +32,5 @@
     {% empty %}
         <p>No categories available.</p>
     {% endfor %}
-</div>
-<div class="button-container">
-    <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
 </div>
 {% endblock %}
