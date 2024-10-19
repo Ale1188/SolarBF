@@ -8,14 +8,71 @@
 {% endblock %}
 
 {% block content %}
-<div class="about-container">
-    <div class="about-image">
+<!-- Hero Section with Slogan -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Powering Tomorrow's Sustainability</h1>
+        <p class="hero-tagline">Bringing clean, renewable energy solutions to homes and businesses across the globe.</p>
     </div>
-    <div class="about-content">
-        <h1>About Us</h1>
-        <h2>Lorem Ipsum Dolor</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae arcu sit amet lorem faucibus hendrerit. Donec et quam eu orci cursus euismod. Nam vel tortor justo. In eu turpis at eros vestibulum tincidunt. Aliquam erat volutpat. Sed at risus vel orci varius congue. Curabitur et tortor eget nisl dapibus ultrices. Sed malesuada tellus ac turpis vestibulum, a eleifend enim malesuada.</p>
-        <p>Morbi quis ante nec risus tincidunt volutpat. Cras tristique nulla non ipsum convallis, eget venenatis arcu aliquet. Donec fringilla purus vitae arcu fermentum, in finibus felis fermentum. Phasellus scelerisque dolor nec ex vehicula, sit amet maximus mi convallis. Nulla nec nunc ac eros dictum sollicitudin nec non lorem. Ut nec magna at lorem gravida aliquet vel et ligula.</p>
+</section>
+
+<!-- History Section with Sliding Images -->
+<section class="history-section">
+    <div class="history-container">
+        <div class="history-content">
+            <h2>Our History</h2>
+            <p>We're committed to accelerating the world's transition to sustainable energy through innovative solar solutions that are accessible to everyone.</p>
+        </div>
+        <div class="history-slider">
+            <div class="slider-container">
+                <img src="{% static 'images/solarAbout1.jpg' %}" alt="Solar installation" class="active">
+                <img src="{% static 'images/solarAbout2.jpg' %}" alt="Team working">
+                <img src="{% static 'images/solarAbout3.jpg' %}" alt="Solar panels">
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn" aria-label="Previous image">←</button>
+                <button class="next-btn" aria-label="Next image">→</button>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<!-- Team Members Section -->
+<section class="team-section">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-image">
+                <img src="{% static 'images/default.jpg' %}" alt="Team member" loading="lazy">
+            </div>
+            <div class="member-info">
+                <h3>John Doe</h3>
+                <p class="position">Chief Executive Officer</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="member-image">
+                <img src="{% static 'images/default.jpg' %}" alt="Team member" loading="lazy">
+            </div>
+            <div class="member-info">
+                <h3>Jane Smith</h3>
+                <p class="position">Technical Director</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <div class="member-image">
+                <img src="{% static 'images/default.jpg' %}" alt="Team member" loading="lazy">
+            </div>
+            <div class="member-info">
+                <h3>Mike Johnson</h3>
+                <p class="position">Installation Manager</p>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/about.js' %}"></script>
+{% endblock%}

@@ -1,42 +1,241 @@
-/* about */
-.about-container {
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 60vh;
+    background-image: url('/static/images/solarAboutA.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 900px;
-    overflow: hidden;
-    justify-content: center;
     align-items: center;
-    margin: 20px auto;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
 }
 
-.about-image img {
-    width: 300px;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    object-fit: cover;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
 }
 
-.about-content {
-    padding: 30px;
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-tagline {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* History Section */
+.history-section {
+    padding: 80px 20px;
+    background-color: #f8f9fa;
+}
+
+.history-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.history-content {
     flex: 1;
 }
 
-.about-content h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+.history-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
     color: #333;
 }
 
-.about-content h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
+.history-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
     color: #666;
 }
 
-.about-content p {
-    font-size: 1em;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 20px;
+.history-slider {
+    flex: 1;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.slider-container {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.slider-container img {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+}
+
+.slider-container img.active {
+    display: block;
+    opacity: 1;
+}
+
+.slider-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.slider-controls button {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.slider-controls button:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* Team Section */
+.team-section {
+    padding: 80px 20px;
+    background-color: white;
+}
+
+.team-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.team-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.team-member {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.member-image {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-image img {
+    transform: scale(1.05);
+}
+
+.member-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.member-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.member-info .position {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.2rem;
+    }
+
+    .history-container {
+        flex-direction: column;
+    }
+
+    .history-content {
+        text-align: center;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .slider-container {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .slider-container img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        position: relative;
+    }
+
+    .slider-container img.active {
+        opacity: 1;
+    }
 }
