@@ -10,12 +10,22 @@ def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user, defaults={'user': request.user})
     
-    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
-    if not item_created:
-        cart_item.quantity += 1
-        cart_item.save()
+    quantity = int(request.POST.get('quantity', 1))
     
-    messages.success(request, f'{product.name} added to cart!')
+    if quantity > product.stock:
+        messages.error(request, f'No hay suficiente stock. Solo quedan {product.stock} disponibles.')
+        return redirect('products')
+
+    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+    
+    if not item_created:
+        cart_item.quantity += quantity
+    else:
+        cart_item.quantity = quantity
+
+    cart_item.save()
+    
+    messages.success(request, f'{product.name} agregado al carrito!')
     return redirect('products')
 
 @login_required
