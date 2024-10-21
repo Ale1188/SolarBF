@@ -1,0 +1,99 @@
+.coupon-card { /* possible opt*/
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.coupon-card:hover {
+    transform: scale(1.05);
+}
+
+.coupon-primary {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.coupon-secundary {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.coupon-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.edit-btn, .delete-btn, .view-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-btn {
+    background-color: rgb(245, 245, 133);
+    color: white;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.coupon-actions a{
+    color: white;
+    text-decoration: none;
+}
+
+.no-coupons {
+    font-size: 1.2rem;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.modal-header {
+    border-bottom: 2px solid #000000;
+    padding: 10px 20px;
+    margin: 0 auto;
+}
+
+.modal-footer {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.modal-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #495057;
+}

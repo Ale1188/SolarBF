@@ -4,8 +4,8 @@
 {% block title %}Coupons{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/coupon.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/coupon.css' %}" />
+<link rel="stylesheet" href="{% static 'css/card.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -13,33 +13,72 @@
     <a href="{% url 'management' %}" class="btn btn-sm btn-primary">
         <i class="fa-solid fa-sliders"></i> Go to management
     </a>
+    {% if user.is_staff %}
     <a href="{% url 'create_coupon' %}" class="btn btn-sm btn-primary">
         <i class="fa-solid fa-plus"></i> Add
     </a>
+    {% endif %}
 </div>
 
 <div class="cardb-list">
     {% for coupon in coupons %}
-        <div class="cardb-item">
-            <h3>{{ coupon.code }}</h3>
-            <p>Type: {{ coupon.discount_type }}</p>
-            <p>Value: {{ coupon.discount_value }}</p>
-            <p>Valid From: {{ coupon.valid_from }}</p>
-            <p>Valid To: {{ coupon.valid_to }}</p>
-            <p>Uses: {{ coupon.uses }}</p>
-            <p>Max Uses: {{ coupon.max_uses }}</p>
-            <a href="{% url 'edit_coupon' coupon.id %}" class="btn btn-sm btn-primary" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-            <form method="POST" action="{% url 'delete_coupon' coupon.id %}" style="display:inline;">
+    <div class="cardb-item">
+        <h3 class="coupon-primary truncate-text">{{ coupon.code }}</h3>
+        <p class="coupon-secundary truncate-text">Value: {{ coupon.discount_value }}</p>
+        <p class="coupon-secundary truncate-text">Type: {{ coupon.discount_type }}</p>
+        <p class="coupon-secundary truncate-text">Valid From: {{ coupon.valid_from }}</p>
+        <p class="coupon-secundary truncate-text">Valid To: {{ coupon.valid_to }}</p>
+        <p class="coupon-secundary truncate-text">Uses: {{ coupon.uses }}</p>
+        <p class="coupon-secundary truncate-text">Max Uses: {{ coupon.max_uses }}</p>
+        {% if user.is_staff %}
+        <div class="coupon-actions">
+            <a href="{% url 'edit_coupon' coupon.id %}" class="edit-btn" title="Edit">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+            <button class="view-btn" data-toggle="modal" data-target="#couponModal{{ coupon.id }}" title="View">
+                <i class="fa-solid fa-eye"></i>
+            </button>
+            <form method="POST" action="{% url 'delete_coupon' coupon.id %}" class="delete-form">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this coupon?');" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this coupon?');" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </form>
         </div>
+        {% endif %}
+    </div>
+
+    <!-- Modal for each coupon -->
+    <div class="modal fade" id="couponModal{{ coupon.id }}" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel{{ coupon.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="couponModalLabel{{ coupon.id }}"><strong></strong>{{ coupon.code }}</h5>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Value:</strong> {{ coupon.discount_value }}</p>
+                    <p><strong>Type:</strong> {{ coupon.discount_type }}</p>
+                    <p><strong>Valid From:</strong> {{ coupon.valid_from }}</p>
+                    <p><strong>Valid To:</strong> {{ coupon.valid_to }}</p>
+                    <p><strong>Uses:</strong> {{ coupon.uses }}</p>
+                    <p><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {% empty %}
-        <p>No coupons available.</p>
+    <p class="no-coupons">No coupons available.</p>
     {% endfor %}
 </div>
 
-<!-- <div class="button-container">
-    <button type="button" class="btn btn-sm btn-primary" onclick="history.back()"><i class="fa-solid fa-left-long"></i> Go Back</button>
-</div> -->
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'plugins/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap.min.js' %}"></script>
 {% endblock %}

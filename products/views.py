@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from accounts.views import is_admin, is_staff
+from django.http import JsonResponse
 
 @login_required
 def productView(request):
@@ -162,3 +163,18 @@ def edit_coupon(request, coupon_id):
         form = CouponForm(instance=coupon)
     
     return render(request, 'admin/edit_coupon.html', {'form': form, 'coupon': coupon})
+
+@login_required
+@user_passes_test(is_staff)
+def coupon_detail(request, coupon_id):
+    coupon = Coupon.objects.get(id=coupon_id)
+    coupon_data = {
+        'code': coupon.code,
+        'discount_value': coupon.discount_value,
+        'discount_type': coupon.discount_type,
+        'valid_from': coupon.valid_from,
+        'valid_to': coupon.valid_to,
+        'uses': coupon.uses,
+        'max_uses': coupon.max_uses,
+    }
+    return JsonResponse(coupon_data)
