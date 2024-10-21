@@ -34,18 +34,14 @@
                     </div>
                     <div class="product-info">
                         <h3>{{ product.name }}</h3>
-                        <!-- <p>{{ product.description }}</p> -->
                         <p class="price">${{ product.price }}</p>
                         {% if user.is_authenticated %}
                             <form action="{% url 'add_to_cart' product.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="buy-button">Add to Cart</button>
                             </form>
-                        {% else %}
-                            <form action="{% url 'add_to_cart' product.id %}" method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="buy-button">Add to Cart</button>
-                            </form>
+                            {% else %}
+                                <p>Please <a href="{% url 'login' %}">log in</a> to add products to your cart.</p>
                         {% endif %}
                     </div>
                 </div>

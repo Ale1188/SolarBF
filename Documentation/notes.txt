@@ -72,3 +72,4 @@ add pip, certifi and environ
 python3 -m pip install --upgrade pip
 pip install certifi
 pip install python-environ
+pip install Pillow

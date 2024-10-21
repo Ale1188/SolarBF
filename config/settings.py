@@ -16,6 +16,7 @@ import os
 import certifi
 import environ
 from pathlib import Path
+from environs import Env
 
 #secure connection
 os.environ['SSL_CERT_FILE'] = certifi.where()
@@ -23,6 +24,7 @@ os.environ['SSL_CERT_FILE'] = certifi.where()
 #load .env file
 env = environ.Env()
 environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,13 +34,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7xf+q^-=rz&w%wx=7ib*-0quuf@^x#x^*bc(fq94%nf0hgd7f6'
+# SECRET_KEY = 'django-insecure-7xf+q^-=rz&w%wx=7ib*-0quuf@^x#x^*bc(fq94%nf0hgd7f6'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.100', '.herokuapp.com']
 
 # Application definition
 

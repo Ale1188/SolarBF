@@ -5,6 +5,12 @@ from django.urls import reverse
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 
+def is_staff(user):
+    return user.is_staff or user.role in ['admin', 'worker'] 
+
+def is_admin(user):
+    return user.is_staff or user.role == 'admin'
+
 def registerView(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
