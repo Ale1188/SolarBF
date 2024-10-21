@@ -62,7 +62,7 @@
                 <h3 class="final-total">Total after discount: ${{ final_total|floatformat:2 }}</h3>
             </div>
 
-            <form action="{% url 'home' %}" method="POST">
+            <form action="{% url 'checkout' %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="checkout-button">Proceed to Checkout</button>
             </form>
@@ -70,7 +70,6 @@
     </div>
 {% endblock %}
 
-{% block script %}
+{% block scripts %}
     <script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
-x

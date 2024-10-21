@@ -1,57 +1,105 @@
-# from django.shortcuts import render, redirect
-# from django.contrib.auth.decorators import login_required
-# from .models import *
-# from cart.models import Cart
-# from products.models import Coupon
-# from decimal import Decimal
-# from django.db import transaction
+from django.shortcuts import render, redirect
+from cart.models import Cart
+from .models import Payment, Order
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from products.models import Coupon
+from django.utils import timezone
+from decimal import Decimal
 
+@login_required
+def checkout(request):
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        messages.error(request, "You don't have items in your cart.")
+        return redirect('cart:view_cart')
 
-#@login_required
-# def checkout(request):
-#     try:
-#         cart = Cart.objects.get(user=request.user)
-#     except Cart.DoesNotExist:
-#         return redirect('cart')  # Redirect if there is no cart
+    cart_items = cart.items.all()
+    cart_total = sum(item.product.price * item.quantity for item in cart_items)
+    
+    user = request.user
+    initial_data = {
+        'street_address': user.street_address,
+        'city': user.city,
+        'state': user.state,
+        'zip_code': user.zip_code,
+        'country': user.country,
+    }
+    
+    coupon_code = request.session.get('coupon_code', None)
+    coupon_discount = Decimal('0.00')
 
-#     cart_items = cart.items.all()
-#     cart_total = sum(item.product.price * item.quantity for item in cart_items)
-#     coupon_discount = 0
-#     coupon_code = request.session.get('coupon_code', None)  # Retrieve the coupon code from the session
+    coupon = None
+    if coupon_code:
+        coupon = Coupon.objects.filter(code=coupon_code).first()
+        if coupon and coupon.valid_from <= timezone.now() <= coupon.valid_to and coupon.uses < coupon.max_uses:
+            if coupon.discount_type == 'percentage':
+                coupon_discount = (cart_total * coupon.discount_value) / 100
+            elif coupon.discount_type == 'fixed_amount':
+                coupon_discount = coupon.discount_value
 
-#     # Check if a coupon is applied
-#     if coupon_code:
-#         try:
-#             coupon = Coupon.objects.select_for_update().get(code=coupon_code)  # Lock the coupon for update
+            coupon_discount = min(coupon_discount, cart_total)
 
-#             if coupon.valid_from <= timezone.now() <= coupon.valid_to and coupon.uses < coupon.max_uses:
-#                 if coupon.discount_type == 'percentage':
-#                     coupon_discount = cart_total * (coupon.discount_value / 100)
-#                 elif coupon.discount_type == 'fixed_amount':
-#                     coupon_discount = coupon.discount_value
+    final_total = cart_total - coupon_discount
 
-#                 # Spend the coupon usage here
-#                 coupon.uses += 1
-#                 coupon.save()  # Save the updated coupon
+    if request.method == 'POST':
+        street_address = request.POST.get('street_address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip_code = request.POST.get('zip_code')
+        country = request.POST.get('country')
 
-#         except Coupon.DoesNotExist:
-#             pass
+        if not all([street_address, city, state, zip_code, country]):
+            messages.error(request, 'Please complete all address fields.')
+            return redirect('checkout')
 
-#     final_total = cart_total - coupon_discount
+        payment_method = request.POST.get('payment_method')
 
-#     if request.method == "POST":
-#         # Here you can handle the payment logic and create the order, etc.
-#         # ...
+        if payment_method not in ['credit_card', 'paypal', 'debit']:
+            messages.error(request, 'Invalid payment method.')
+            return redirect('checkout')
 
-#         # After completing the payment, you can clear the coupon code
-#         del request.session['coupon_code']
+        try:
+            order = Order.objects.create(
+                user=request.user,
+                total_amount=cart_total,
+                discount=coupon_discount,
+                final_amount=final_total,
+                coupon=coupon,
+                street_address=street_address,
+                city=city,
+                state=state,
+                zip_code=zip_code,
+                country=country
+            )
+            order.cart_items.set(cart_items)
 
-#         return redirect('order_confirmation')  # Redirect to the order confirmation page
+            payment = Payment.objects.create(
+                order=order,
+                amount=final_total,
+                payment_method=payment_method,
+            )
 
-#     return render(request, 'store/checkout.html', {
-#         'cart_items': cart_items,
-#         'cart_total': cart_total,
-#         'final_total': final_total,
-#         'coupon_discount': coupon_discount,
-#         'coupon_code': coupon_code,
-#     })
+            payment.status = 'completed'
+            payment.save()
+
+            order.mark_as_paid()
+
+            cart.items.clear()
+
+            messages.success(request, "Payment successful!")
+            return redirect('products')
+
+        except Exception as e:
+            messages.error(request, f"An error occurred while processing the payment: {str(e)}")
+            return redirect('checkout')
+
+    return render(request, 'store/checkout.html', {
+        'cart_items': cart_items,
+        'cart_total': cart_total,
+        'coupon_code': coupon_code,
+        'coupon_discount': coupon_discount,
+        'final_total': final_total,
+        'initial_data': initial_data,
+    })

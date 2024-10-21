@@ -27,6 +27,7 @@
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
             <p>Price: ${{ product.price }}</p>
+            <p>Stock: {{ product.stock }}</p>
             <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-primary" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
             {% if user.is_staff %}
             <form method="POST" action="{% url 'delete_product' product.id %}" style="display:inline;">
