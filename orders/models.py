@@ -5,8 +5,10 @@ from products.models import Product
 class ShippingAddress(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
+    state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=50)
 
     def __str__(self):
         return f'{self.address}, {self.city} - {self.postal_code}'
@@ -19,7 +21,7 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Order {self.id} by {self.user.username}"
+        return f"Order #{self.id} by {self.user.first_name} {self.user.last_name}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
