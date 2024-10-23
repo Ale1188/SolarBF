@@ -42,8 +42,8 @@
                 <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter your coupon code" required>
                 <button type="submit" class="coupon-button">Apply Coupon</button>
             </form>
-        
-            {% if coupon_code %}
+
+            {% if coupon_code and valid_coupon %}
                 <div class="applied-coupon">
                     <p class="coupon-message">
                         Coupon applied: <strong>{{ coupon_code }}</strong>
@@ -61,8 +61,18 @@
                 <h4 class="total-amount">Total: ${{ cart_total|floatformat:2 }}</h4>
                 <h3 class="final-total">Total after discount: ${{ final_total|floatformat:2 }}</h3>
             </div>
+            <a href="{% if cart_items %}{% url 'checkout' %}{% else %}#{% endif %}" class="checkout-button">Proceed to Checkout</a>
 
-            <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
+            {% if messages %}
+                <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            
         </div>
     </div>
 {% endblock %}

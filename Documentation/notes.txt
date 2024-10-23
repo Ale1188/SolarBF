@@ -74,3 +74,19 @@ pip install certifi
 pip install python-environ
 pip install Pillow
 pip install environs
+pip install environs
+pip install stripe
+
+
+Create .env in config
+HOST_PASSWORD='Yours'
+HOST_EMAIL='Yours'
+
+STRIPE_PUBLIC_KEY ='Yours'
+STRIPE_SECRET_KEY='Yours'
+
+STRIPE_PUBLIC_KEY_TEST ='Yours'
+STRIPE_SECRET_KEY_TEST='Yours'
+
+export DEBUG=True
+export SECRET_KEY='Yours'

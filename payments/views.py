@@ -12,7 +12,6 @@ from decimal import Decimal
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required
-@login_required
 def checkout(request):
     try:
         cart = Cart.objects.get(user=request.user)
@@ -130,6 +129,14 @@ def success(request):
         cart.items.all().delete()
     except Cart.DoesNotExist:
         pass
+
+    coupon_code = request.session.get('coupon_code', None)
+    if coupon_code:
+        coupon = Coupon.objects.filter(code=coupon_code).first()
+        if coupon and coupon.uses < coupon.max_uses:
+            coupon.uses += 1
+            coupon.save()
+        del request.session['coupon_code']
     
     shipping_address = order.shipping_address
 

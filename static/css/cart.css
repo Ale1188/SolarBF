@@ -122,7 +122,7 @@
 }
 
 .coupon-button {
-    width: 100%;
+    width: 30vh;
     padding: 10px;
     font-size: 1rem;
     border-radius: 5px;
@@ -131,20 +131,17 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
 }
 
 .coupon-button:hover {
     background-color: #0056b3;
 }
 
-.total-amount {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
 .checkout-button {
-    width: 100%;
+    width: 30vh;
     padding: 10px;
     font-size: 1.2rem;
     border-radius: 5px;
@@ -153,10 +150,36 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin: 10px auto;
+    display: block;
+    text-align: center;
 }
 
 .checkout-button:hover {
     background-color: #45a049;
+    color: white;
+}
+
+.remove-coupon-button {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.remove-coupon-button:hover {
+    color: #c82333;
+}
+
+.total-amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 20px 0;
 }
 
 .applied-coupon {
@@ -174,21 +197,6 @@
     margin: 0;
     color: #004085;
     font-size: 0.9rem;
-}
-
-.remove-coupon-button {
-    background: none;
-    border: none;
-    color: #dc3545;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0 5px;
-    margin-left: 10px;
-    transition: color 0.3s ease;
-}
-
-.remove-coupon-button:hover {
-    color: #c82333;
 }
 
 .discount-info {

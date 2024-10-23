@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from django.utils import timezone
+import os
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -18,6 +19,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product_images/', blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def delete(self, *args, **kwargs):
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.name
