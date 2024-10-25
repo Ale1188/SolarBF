@@ -19,6 +19,7 @@
                 <th>Total</th>
                 <th>Status</th>
                 <th>Shipping Address</th>
+                <th>items</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,6 +37,13 @@
                         {% endif %}
                     </td>
                     <td>{{ order.shipping_address.address }}, {{ order.shipping_address.city }}, {{ order.shipping_address.state }} - {{ order.shipping_address.postal_code }}</td>
+                    <td>
+                        <ul>
+                            {% for item in order.items.all %}
+                                <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.price }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                     <td>
                         <form action="{% url 'delete_order' order.id %}" method="POST">
                             {% csrf_token %}
