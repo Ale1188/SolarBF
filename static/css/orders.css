@@ -1,47 +1,17 @@
-.cardb-item h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #2E7D32;
-}
-
-.cardb-item p {
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-.cardb-item label {
-    font-weight: bold;
-    color: #2E7D32;
-}
-
-.cardb-item input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.2);
-}
-
 .order-modal-header h5 {
     font-size: 18px;
     font-weight: bold;
     margin: 0;
 }
 
-.order-modal-body {
-    padding: 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
-}
-
-.order-modal-body p {
-    margin-bottom: 10px;
-}
-
-.order-modal-body strong {
-    color: #2E7D32;
-}
-
 .order-modal-items-list {
     list-style-type: disc;
     padding-left: 20px;
     margin-top: 5px;
+}
+
+.form-control{
+    width: auto;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }

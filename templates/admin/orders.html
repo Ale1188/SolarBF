@@ -5,7 +5,7 @@
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/orders.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/card.css' %}"/> 
 {% endblock %}
 
 {% block content %}
@@ -16,21 +16,21 @@
                 <h3>Order ID: {{ order.id }}</h3>
                 <p><strong>Date:</strong> {{ order.created_at }}</p>
                 <p><strong>Total:</strong> ${{ order.order_total }}</p>
-                <p><strong>Status:</strong> {% if order.is_paid %} Paid {% else %} Pending {% endif %}</p>
                 <p><strong>Shipping Address:</strong><br> 
                     {{ order.shipping_address.address }}, {{ order.shipping_address.city }}, {{ order.shipping_address.state }} - {{ order.shipping_address.postal_code }}
                 </p>
+                <form action="{% url 'update_order_status' order.id %}" method="POST">
+                    {% csrf_token %}
+                    <label for="status">Change Status:</label>
+                    <select name="status" class="form-control" onchange="this.form.submit()">
+                        {% for code, label in status_choices %}
+                            <option value="{{ code }}" {% if order.status == code %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
 
                 <!-- Action buttons -->
                 <div>
-                    <form action="{% url 'toggle_order_completed' order.id %}" method="POST" style="margin-top: 10px;">
-                        {% csrf_token %}
-                        <label>
-                            <input type="checkbox" onchange="this.form.submit()" {% if order.is_completed %}checked{% endif %}>
-                            Mark as Completed
-                        </label>
-                    </form>
-
                     <button class="btn-custom btn-small btn-info" data-toggle="modal" data-target="#viewOrderModal{{ order.id }}" title="View">
                         <i class="fa-solid fa-eye"></i>
                     </button>
@@ -48,10 +48,16 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="viewOrderModalLabel{{ order.id }}">Order Details - ID {{ order.id }}</h5>
                         </div>
-                        <div class="order-modal-body">
+                        <div class="modal-body">
                             <p><strong>Date:</strong> {{ order.created_at }}</p>
                             <p><strong>Total:</strong> ${{ order.order_total }}</p>
-                            <p><strong>Status:</strong> {% if order.is_paid %} Paid {% else %} Pending {% endif %}</p>
+                            <p><strong>Status:</strong> 
+                                {% for code, label in status_choices %}
+                                    {% if order.status == code %}
+                                        {{ label }}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
                             <p><strong>Shipping Address:</strong><br> 
                                 {{ order.shipping_address.address }}, {{ order.shipping_address.city }}, {{ order.shipping_address.state }} - {{ order.shipping_address.postal_code }}
                             </p>

@@ -23,13 +23,13 @@
 <div class="cardb-list">
     {% for coupon in coupons %}
     <div class="cardb-item">
-        <h3 class="coupon-primary truncate-text">{{ coupon.code }}</h3>
-        <p class="coupon-secundary truncate-text"><strong>Value:</strong> {{ coupon.discount_value }}</p>
-        <p class="coupon-secundary truncate-text"><strong>Type:</strong> {{ coupon.discount_type }}</p>
-        <p class="coupon-secundary truncate-text"><strong>Valid From:</strong> {{ coupon.valid_from }}</p>
-        <p class="coupon-secundary truncate-text"><strong>Valid To:</strong> {{ coupon.valid_to }}</p>
-        <p class="coupon-secundary truncate-text"><strong>Uses:</strong> {{ coupon.uses }}</p>
-        <p class="coupon-secundary truncate-text"><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
+        <h3 class="truncate-text">{{ coupon.code }}</h3>
+        <p class="truncate-text"><strong>Value:</strong> {{ coupon.discount_value }}</p>
+        <p class="truncate-text"><strong>Type:</strong> {{ coupon.discount_type }}</p>
+        <p class="truncate-text"><strong>Valid From:</strong> {{ coupon.valid_from }}</p>
+        <p class="truncate-text"><strong>Valid To:</strong> {{ coupon.valid_to }}</p>
+        <p class="truncate-text"><strong>Uses:</strong> {{ coupon.uses }}</p>
+        <p class="truncate-text"><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
         {% if user.is_staff %}
         <div>
             <button class="btn-custom btn-small btn-primary" data-toggle="modal" data-target="#editCouponModal{{ coupon.id }}" title="Edit">
@@ -48,8 +48,8 @@
     <!-- View Coupon Modal -->
     <div class="modal fade" id="couponModal{{ coupon.id }}" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel{{ coupon.id }}" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content text-center">
-                <div class="view-modal-header">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title" id="couponModalLabel{{ coupon.id }}">{{ coupon.code }}</h5>
                 </div>
                 <div class="modal-body">
@@ -60,7 +60,7 @@
                     <p><strong>Uses:</strong> {{ coupon.uses }}</p>
                     <p><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
                 </div>
-                <div class="view-modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

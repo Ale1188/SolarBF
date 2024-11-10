@@ -28,6 +28,23 @@
     object-fit: cover;
 }
 
+/* Text */
+.cardb-item h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2E7D32;
+}
+
+.cardb-item p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.cardb-item label {
+    font-weight: bold;
+    color: #2E7D32;
+}
+
 .truncate-text {
     white-space: nowrap;
     overflow: hidden;
@@ -36,7 +53,7 @@
 }
 
 /* Media Queries Responsive */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     .cardb-item {
         width: calc(33.33% - 10px);
     }

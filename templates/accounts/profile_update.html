@@ -14,9 +14,11 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Save changes</button>
+            <button type="submit" class="btn-custom btn-large btn-success">Save changes</button>
         </form>
     </div>
-    <a href="{% url 'profile' %}" class="back-link">Go back to profile</a>
+    <div class="button-container">
+        <a href="{% url 'profile' %}" class="btn-custom btn-medium btn-secondary ">Go back to profile</a>
+    </div>
 </div>
 {% endblock %}
