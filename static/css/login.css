@@ -73,17 +73,17 @@
 }
 
 .mt-3 a {
-    color: #007bff;
+    /* color: #007bff; */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .mt-3 a:hover {
-    color: #0056b3;
+    /* color: #0056b3; */
     text-decoration: underline;
 }
 
-/* Estilos para mensajes de error */
+/* Style for message -error- */
 .errorlist {
     color: #dc3545;
     list-style: none;

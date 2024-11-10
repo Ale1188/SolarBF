@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Payment Canceled{% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/success.css' %}"/>
+{% endblock %}
+
 {% block content %}
+<div class="content-container">
     <h1>Payment Canceled</h1>
     <p>Your payment was not completed. Please try again.</p>
-    <a href="{% url 'checkout' %}">Return to Checkout</a>
+    <a class="btn-custom btn-large btn-success mt-4" href="{% url 'cart' %}">Return to Cart</a>
+</div>
 {% endblock %}

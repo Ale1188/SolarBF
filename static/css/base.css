@@ -32,6 +32,13 @@ img {
     height: 50vh;
 }
 
+.item-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 /* Buttons */
 .button-container {
     display: flex;
@@ -44,7 +51,111 @@ img {
     margin: 0 10px;
 }
 
-.button-close {
+.btn-custom {
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.btn-custom.btn-extralarge {
+    padding: 12px 24px;
+    font-size: 18px;
+}
+
+.btn-custom.btn-large {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.btn-custom.btn-medium {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.btn-custom.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.btn-custom.btn-extrasmall {
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+.btn-primary  {
+    background-color: #276c2a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2E7D32;
+    color: white;
+}
+
+.btn-primary:focus {
+    background-color: #2E7D32;
+    border-color: #2E7D32;
+    box-shadow: 0 0 0 .25rem rgba(46, 125, 50, 0.5);
+}
+
+.btn-secondary {
+    /* background-color: #B0BEC5; */
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #90A4AE;
+    color: white;
+}
+
+.btn-success {
+    background-color: #388E3C;
+    color: white;
+}
+.btn-success:hover {
+    background-color: #2E7D32;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #1976D2;
+    color: white;
+}
+.btn-edit:hover {
+    background-color: #1565C0;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #D32F2F;
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #C62828;
+    color: white;
+}
+
+.btn-info {
+    background-color: #FBC02D;
+    color: white;
+}
+.btn-info:hover {
+    background-color: #F9A825;
+    color: white;
+}
+
+.btn-info:focus {
+    color: white;
+    background-color: #F9A825;
+    border-color: #F9A825;
+    box-shadow: 0 0 0 .25rem rgba(249, 168, 37, 0.5);
+}
+
+.button-close { /* Notifications button X */
     background-color: transparent;
     border: transparent;
     color: black;
@@ -115,4 +226,23 @@ img {
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #2E7D32;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 15px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
 }

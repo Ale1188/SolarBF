@@ -23,7 +23,8 @@ def management(request):
 @user_passes_test(is_staff)
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'admin/product_list.html', {'products': products})
+    categories = Category.objects.all()
+    return render(request, 'admin/product_list.html', {'products': products, 'categories': categories})
 
 
 @login_required
@@ -78,14 +79,15 @@ def delete_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     category.delete()
     messages.success(request, 'Category deleted successfully!')
-    return redirect('category_list')
+    return redirect('categories')
 
 
 @login_required
 @user_passes_test(is_staff)
 def coupon_list(request):
     coupons = Coupon.objects.all()
-    return render(request, 'admin/coupons.html', {'coupons': coupons})
+    discount_type_choices = Coupon.COUPON_TYPE_CHOICES
+    return render(request, 'admin/coupons.html', {'coupons': coupons, 'discount_type_choices': discount_type_choices})
 
 
 @login_required

@@ -12,6 +12,9 @@ def is_admin(user):
     return user.is_staff or user.role == 'admin'
 
 def registerView(request):
+    if request.user.is_authenticated:
+        return redirect('profile')
+    
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -28,6 +31,9 @@ def registerView(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 def loginView(request):
+    if request.user.is_authenticated:
+        return redirect('profile')
+    
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():

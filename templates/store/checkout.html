@@ -12,51 +12,50 @@
     {% csrf_token %}
     
     <div class="left-section">
-        <h3>Shipping Address</h3>
+        <h3 class="modal-title item-center">Shipping Address</h3>
         <div>
-            <label for="recipient_name">Recipient Name</label>
+            <label for="recipient_name"><strong>Recipient Name</strong></label>
             <input type="text" id="recipient_name" name="recipient_name" placeholder="John Doe" value="{{ user.get_full_name }}" required>
         </div>
         <div>
-            <label for="street_address">Street Address</label>
+            <label for="street_address"><strong>Street Address</strong></label>
             <input type="text" id="street_address" name="street_address" placeholder="123 Main St" value="{{ initial_data.street_address }}" required>
         </div>
         <div>
-            <label for="city">City</label>
+            <label for="city"><strong>City</strong></label>
             <input type="text" id="city" name="city" placeholder="Your city" value="{{ initial_data.city }}" required>
         </div>
         <div>
-            <label for="state">State/Province</label>
+            <label for="state"><strong>State/Province</strong></label>
             <input type="text" id="state" name="state" placeholder="Your state" value="{{ initial_data.state }}" required>
         </div>
         <div>
-            <label for="zip_code">Zip Code</label>
+            <label for="zip_code"><strong>Zip Code</strong></label>
             <input type="text" id="zip_code" name="zip_code" placeholder="Postal Code" value="{{ initial_data.zip_code }}" required>
         </div>
         <div>
-            <label for="country">Country</label>
+            <label for="country"><strong>Country</strong></label>
             <input type="text" id="country" name="country" placeholder="Your country" value="{{ initial_data.country }}" required>
         </div>
     </div>
 
     <div class="right-section">
-        <h3>Order Summary</h3>
+        <h3 class="item-center modal-title">Order Summary</h3>
         <ul>
             {% for item in cart_items %}
                 <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.product.price }}</li>
             {% endfor %}
         </ul>
-        <p>Subtotal: ${{ cart_total }}</p>
-        
+        <p class="item-center"><strong>Subtotal:</strong> ${{ cart_total }}</p>
         {% if coupon_code %}
-            <p>Discount (Coupon: {{ coupon_code }}): -${{ coupon_discount|floatformat:2 }}</p>
-            <p>Total after discount: ${{ final_total|floatformat:2 }}</p>
+            <p class="item-center"><strong>Discount (Coupon: {{ coupon_code }}):</strong>  -${{ coupon_discount|floatformat:2 }}</p>
+            <p class="item-center"><strong>Total after discount:</strong> ${{ final_total|floatformat:2 }}</p>
         {% else %}
-            <p>Total: ${{ cart_total|floatformat:2 }}</p>
+            <p class="item-center"><strong>Total:</strong> ${{ cart_total|floatformat:2 }}</p>
         {% endif %}
-        <button type="submit" id="submit-button">Confirm Payment</button>
         <div class="button-container">
-            <a href="{% url 'cart' %}" class="btn btn-sm btn-primary">
+            <button type="submit" id="submit-button" class="btn-custom btn-large btn-success">Confirm Payment</button>
+            <a href="{% url 'cancel' %}" class="btn-custom btn-medium btn-secondary">
                 Cancel payment
             </a>
         </div>

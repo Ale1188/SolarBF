@@ -31,16 +31,16 @@
     margin-top: 15px;
 }
 
-.edit-btn, .delete-btn, .view-btn {
+/* .edit-btn, .delete-btn, .view-btn {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
+} */
 
-.view-btn {
+/* .view-btn {
     background-color: rgb(245, 245, 133);
     color: white;
 }
@@ -53,7 +53,7 @@
 .delete-btn {
     background-color: #dc3545;
     color: white;
-}
+} */
 
 .coupon-actions a{
     color: white;
@@ -74,13 +74,13 @@
     display: block;
 }
 
-.modal-header {
+.view-modal-header {
     border-bottom: 2px solid #000000;
     padding: 10px 20px;
     margin: 0 auto;
 }
 
-.modal-footer {
+.view-modal-footer {
     padding: 10px 20px;
     display: flex;
     justify-content: center;

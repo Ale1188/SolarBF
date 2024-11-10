@@ -16,7 +16,7 @@
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 <h2>{{ product.name }}</h2>
                 <p> $ {{ product.price }}</p>
-                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#productModal{{ forloop.counter }}">See more</button>
+                <button class="btn-custom btn-medium btn-primary" data-toggle="modal" data-target="#productModal{{ forloop.counter }}">See more</button>
             </div>
 
             <!-- Modal -->
@@ -40,7 +40,6 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
                             <form action="{% url 'add_to_cart' product.id %}" method="POST" class="add-to-cart-form">
                                 {% csrf_token %}
                                 <div class="input-group mb-3">
@@ -48,7 +47,10 @@
                                     <input type="number" name="quantity" id="quantity{{ forloop.counter }}" value="1" min="1" class="form-control" style="text-align: center;">
                                     <button type="button" class="btn btn-sm btn-outline-secondary" id="increment{{ forloop.counter }}" data-stock="{{ product.stock }}">+</button>
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-success">Add to Cart</button>
+                                <div>
+                                    <button type="submit" class="btn-custom btn-medium btn-success">Add</button>
+                                    <button type="button" class="btn-custom btn-medium btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
                             </form>
                         </div>
                     </div>

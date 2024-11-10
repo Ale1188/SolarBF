@@ -52,14 +52,17 @@ def add_to_cart(request, product_id):
 def view_cart(request):
     cart, _ = Cart.objects.get_or_create(user=request.user)
 
-    # Clear cart if inactive for more than 1 hour
-    if timezone.now() - cart.last_updated > timezone.timedelta(hours=1):
+    if timezone.now() - cart.last_updated > timezone.timedelta(hours=1) and not request.session.get('cart_cleared'):
         for cart_item in cart.items.all():
             cart_item.product.stock += cart_item.quantity
             cart_item.product.save()
         cart.items.all().delete()
+        request.session['cart_cleared'] = True
         messages.info(request, "Your cart has been cleared due to inactivity.")
         return redirect('cart')
+
+    if request.session.get('cart_cleared') and cart.items.exists():
+        request.session.pop('cart_cleared', None)
 
     cart_items = cart.items.select_related('product').all()
     cart_total = sum(item.product.price * item.quantity for item in cart_items)

@@ -12,7 +12,7 @@
 {% block content %}
     <div class="container-cart">
         <div class="left-section">
-            <h1>Your Shopping Cart</h1>
+            <h1 class="modal-title item-center">Your Shopping Cart</h1>
             {% if cart_items %}
                 <div class="cart-items">
                 {% for item in cart_items %}
@@ -20,7 +20,7 @@
                         <div class="item-details">
                             <span class="item-name">{{ item.product.name }}</span>
                             <span class="item-price">${{ item.product.price }}</span>
-                            <span class="item-quantity">Cantidad: {{ item.quantity }}</span>
+                            <span class="item-quantity">Quantity: {{ item.quantity }}</span>
                             <form action="{% url 'remove_from_cart' item.id %}" method="POST" class="remove-form">
                                 {% csrf_token %}
                                 <button type="submit" class="remove-button">×</button>
@@ -36,12 +36,14 @@
             {% endif %}
         </div>
         <div class="right-section">
-            <h2>Apply Coupon Code</h2>
-            <form method="post" class="coupon-form">
-                {% csrf_token %}
-                <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter your coupon code" required>
-                <button type="submit" class="coupon-button">Apply Coupon</button>
-            </form>
+            <h2 class="item-center modal-title mb-3">Apply Coupon Code</h2>
+            <div class="item-center">
+                <form method="post" class="coupon-form">
+                    {% csrf_token %}
+                    <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter your coupon code" required>
+                    <button type="submit" class="btn-custom btn-large btn-edit center item-center">Apply Coupon</button>
+                </form>
+            </div>
 
             {% if coupon_code and valid_coupon %}
                 <div class="applied-coupon">
@@ -55,16 +57,17 @@
                     </p>
                 </div>
             {% endif %}
-        
-            <div class="discount-info">
-                <h5>Discount: ${{ coupon_discount|floatformat:2 }}</h5>
-                <h4 class="total-amount">Total: ${{ cart_total|floatformat:2 }}</h4>
-                <h3 class="final-total">Total after discount: ${{ final_total|floatformat:2 }}</h3>
+
+            <div class="item-center">
+                <div class="discoutn-info mt-5">
+                    <h5>Discount: ${{ coupon_discount|floatformat:2 }}</h5>
+                    <h4 class="total-amount">Total: ${{ cart_total|floatformat:2 }}</h4>
+                    <h3 class="final-total">Total after discount: ${{ final_total|floatformat:2 }}</h3>
+                </div>
             </div>
-            <a href="{% if cart_items %}{% url 'checkout' %}{% else %}#{% endif %}" class="checkout-button">Proceed to Checkout</a>
-
-
-            
+            <div class="item-center">
+                <a href="{% if cart_items %}{% url 'checkout' %}{% else %}#{% endif %}" class="btn-custom btn-large btn-success item-center">Proceed to Checkout</a>
+            </div>
         </div>
     </div>
 {% endblock %}

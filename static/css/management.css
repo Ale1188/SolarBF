@@ -1,7 +1,7 @@
 .management {
     max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
 }
 
 .management h2 {
@@ -49,7 +49,7 @@
     font-size: 0.9rem;
 }
 
-.management-card a {
+/* .management-card a {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     background-color: #007bff;
@@ -61,4 +61,4 @@
 
 .management-card a:hover {
     background-color: #0056b3;
-}
+} */

@@ -120,7 +120,7 @@
     border: 1px solid #ddd;
     margin-bottom: 10px;
 }
-
+/* 
 .coupon-button {
     width: 30vh;
     padding: 10px;
@@ -134,9 +134,9 @@
     margin: 0 auto;
     display: block;
     text-align: center;
-}
+} */
 
-.coupon-button:hover {
+/* .coupon-button:hover {
     background-color: #0056b3;
 }
 
@@ -159,7 +159,7 @@
 .checkout-button:hover {
     background-color: #45a049;
     color: white;
-}
+} */
 
 .remove-coupon-button {
     background: none;

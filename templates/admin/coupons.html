@@ -10,13 +10,13 @@
 
 {% block content %}
 <div class="button-container">
-    <a href="{% url 'management' %}" class="btn btn-sm btn-primary">
+    <!-- <a href="{% url 'management' %}" class="btn-custom btn-medium btn-primary">
         <i class="fa-solid fa-sliders"></i> Go to management
-    </a>
+    </a> -->
     {% if user.is_staff %}
-    <a href="{% url 'create_coupon' %}" class="btn btn-sm btn-primary">
+    <button class="btn-custom btn-medium btn-success" data-toggle="modal" data-target="#addCouponModal">
         <i class="fa-solid fa-plus"></i> Add
-    </a>
+    </button>
     {% endif %}
 </div>
 
@@ -24,36 +24,33 @@
     {% for coupon in coupons %}
     <div class="cardb-item">
         <h3 class="coupon-primary truncate-text">{{ coupon.code }}</h3>
-        <p class="coupon-secundary truncate-text">Value: {{ coupon.discount_value }}</p>
-        <p class="coupon-secundary truncate-text">Type: {{ coupon.discount_type }}</p>
-        <p class="coupon-secundary truncate-text">Valid From: {{ coupon.valid_from }}</p>
-        <p class="coupon-secundary truncate-text">Valid To: {{ coupon.valid_to }}</p>
-        <p class="coupon-secundary truncate-text">Uses: {{ coupon.uses }}</p>
-        <p class="coupon-secundary truncate-text">Max Uses: {{ coupon.max_uses }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Value:</strong> {{ coupon.discount_value }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Type:</strong> {{ coupon.discount_type }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Valid From:</strong> {{ coupon.valid_from }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Valid To:</strong> {{ coupon.valid_to }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Uses:</strong> {{ coupon.uses }}</p>
+        <p class="coupon-secundary truncate-text"><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
         {% if user.is_staff %}
-        <div class="coupon-actions">
-            <a href="{% url 'edit_coupon' coupon.id %}" class="edit-btn" title="Edit">
+        <div>
+            <button class="btn-custom btn-small btn-primary" data-toggle="modal" data-target="#editCouponModal{{ coupon.id }}" title="Edit">
                 <i class="fa-solid fa-pen-to-square"></i>
-            </a>
-            <button class="view-btn" data-toggle="modal" data-target="#couponModal{{ coupon.id }}" title="View">
+            </button>
+            <button class="btn-custom btn-small btn-info" data-toggle="modal" data-target="#couponModal{{ coupon.id }}" title="View">
                 <i class="fa-solid fa-eye"></i>
             </button>
-            <form method="POST" action="{% url 'delete_coupon' coupon.id %}" class="delete-form">
-                {% csrf_token %}
-                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this coupon?');" title="Delete">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </form>
+            <button class="btn-custom btn-small btn-danger" data-toggle="modal" data-target="#deleteCouponModal{{ coupon.id }}" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+            </button>
         </div>
         {% endif %}
     </div>
 
-    <!-- Modal for each coupon -->
+    <!-- View Coupon Modal -->
     <div class="modal fade" id="couponModal{{ coupon.id }}" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel{{ coupon.id }}" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="couponModalLabel{{ coupon.id }}"><strong></strong>{{ coupon.code }}</h5>
+                <div class="view-modal-header">
+                    <h5 class="modal-title" id="couponModalLabel{{ coupon.id }}">{{ coupon.code }}</h5>
                 </div>
                 <div class="modal-body">
                     <p><strong>Value:</strong> {{ coupon.discount_value }}</p>
@@ -63,8 +60,80 @@
                     <p><strong>Uses:</strong> {{ coupon.uses }}</p>
                     <p><strong>Max Uses:</strong> {{ coupon.max_uses }}</p>
                 </div>
-                <div class="modal-footer">
+                <div class="view-modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Coupon Modal -->
+    <div class="modal fade" id="editCouponModal{{ coupon.id }}" tabindex="-1" role="dialog" aria-labelledby="editCouponModalLabel{{ coupon.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCouponModalLabel{{ coupon.id }}">Edit Coupon</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'edit_coupon' coupon.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="code">Code</label>
+                            <input type="text" name="code" class="form-control" value="{{ coupon.code }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="discount_value">Discount Value</label>
+                            <input type="number" name="discount_value" class="form-control" value="{{ coupon.discount_value }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="discount_type">Discount Type</label>
+                            <select name="discount_type" class="form-control" required>
+                                <option selected disabled>Select option</option>
+                                {% for code, name in discount_type_choices %}
+                                    <option value="{{ code }}" {% if code == coupon.discount_type %}selected{% endif %}>
+                                        {{ name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valid_from">Valid From</label>
+                            <input type="date" name="valid_from" class="form-control" value="{{ coupon.valid_from|date:'Y-m-d' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valid_to">Valid To</label>
+                            <input type="date" name="valid_to" class="form-control" value="{{ coupon.valid_to|date:'Y-m-d' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="max_uses">Max Uses</label>
+                            <input type="number" name="max_uses" class="form-control" value="{{ coupon.max_uses }}" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Coupon Modal -->
+    <div class="modal fade" id="deleteCouponModal{{ coupon.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCouponModalLabel{{ coupon.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCouponModalLabel{{ coupon.id }}">Delete Coupon</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete the coupon "{{ coupon.code }}"?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" action="{% url 'delete_coupon' coupon.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -75,6 +144,54 @@
     {% endfor %}
 </div>
 
+<!-- Add Coupon Modal -->
+<div class="modal fade" id="addCouponModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Coupon</h5>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'create_coupon' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="code">Code</label>
+                        <input type="text" name="code" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount_value">Discount Value</label>
+                        <input type="number" name="discount_value" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount_type">Discount Type</label>
+                        <select name="discount_type" class="form-control" required>
+                            <option selected disabled>Select option</option>
+                            {% for code, name in discount_type_choices %}
+                                <option value="{{ code }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="valid_from">Valid From</label>
+                        <input type="date" name="valid_from" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valid_to">Valid To</label>
+                        <input type="date" name="valid_to" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="max_uses">Max Uses</label>
+                        <input type="number" name="max_uses" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create Coupon</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

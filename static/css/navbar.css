@@ -28,11 +28,6 @@
     align-items: center;
 }
 
-.nav-link {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1rem;
-}
 
 .nav-link:hover {
     color: #2E7D32;
@@ -48,12 +43,41 @@
     text-decoration: none;
 }
 
-.logout-btn {
+.navbar .btn-logout, .btn-login {
     background-color: white;
+    color: #2E7D32;
+    border: 2px solid #2E7D32;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.login-btn {
+.navbar .btn-logout:hover, .btn-login:hover {
+    background-color: #2E7D32;
+    color: white;
+}
+
+.navbar .btn-profile {
     background-color: white;
+    color: #2E7D32;
+    border: 2px solid #2E7D32;
+    border-radius: 50%;
+    font-size: 16px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-profile:hover {
+    background-color: #2E7D32;
+    color: white;
 }
 
 .nav-toggle {
@@ -83,6 +107,7 @@
 }
 
 @media (max-width: 768px) {
+
     .nav-links {
         display: none;
         flex-direction: column;
@@ -106,6 +131,10 @@
     }
 
     .nav-logo img {
-        max-height: 32px; /* Logo más pequeño en móviles */
+        max-height: 32px;
+    }
+
+    .btn-profile{
+        margin-top: 10px;
     }
 }

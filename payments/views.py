@@ -8,6 +8,7 @@ from products.models import Coupon
 from orders.models import ShippingAddress, Order, OrderItem 
 from django.utils import timezone
 from decimal import Decimal
+from django.shortcuts import get_object_or_404
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -96,7 +97,7 @@ def checkout(request):
                 }],
                 mode='payment',
                 success_url=f'http://127.0.0.1:8000/checkout/success/?order_id={order.id}',
-                cancel_url='http://127.0.0.1:8000/cart/',
+                cancel_url=f'http://127.0.0.1:8000/checkout/cancel/?order_id={order.id}',
                 billing_address_collection='required',
             )
             return redirect(session.url, code=303)
@@ -148,3 +149,15 @@ def success(request):
         'zip_code': shipping_address.postal_code,
         'country': shipping_address.country,
     })
+
+@login_required
+def cancel(request):
+    order_id = request.GET.get('order_id')
+    if order_id:
+        order = get_object_or_404(Order, id=order_id, user=request.user, is_paid=False)
+        order.delete()
+        messages.info(request, "Your order has been canceled.")
+    else:
+        messages.warning(request, "No order found to cancel.")
+    
+    return render(request, 'store/cancel.html')
