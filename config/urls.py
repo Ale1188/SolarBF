@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.contrib.auth import urls
 from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import handler404, handler403
+from django.shortcuts import render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,3 +35,14 @@ urlpatterns = [
 
 # config to server images
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# config customs errors pages.
+def custom_404_view(request, exception):
+    return render(request, 'errors/404.html', status=404)
+
+def custom_403_view(request, exception):
+    return render(request, 'errors/403.html', status=403)
+
+handler404 = custom_404_view
+handler403 = custom_403_view
