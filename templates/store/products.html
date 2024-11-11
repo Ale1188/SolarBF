@@ -4,18 +4,20 @@
 {% block title %}Products{% endblock %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/product.css' %}"/>
 {% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}
     
-    <div class="product-list">
+    <div class="cardb-list">
         {% for product in products %}
-            <div class="product-item">
+            <div class="cardb-item">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 <h2>{{ product.name }}</h2>
-                <p> $ {{ product.price }}</p>
+                <p><strong>$</strong> {{ product.price }}</p>
+                <p><strong>Stock:</strong> {{ product.stock }}</p>
                 <button class="btn-custom btn-medium btn-primary" data-toggle="modal" data-target="#productModal{{ forloop.counter }}">See more</button>
             </div>
 

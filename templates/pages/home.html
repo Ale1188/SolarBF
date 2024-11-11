@@ -5,104 +5,136 @@
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/card.css' %}"/>
 {% endblock %}
 
 {% block content %}
-
-    <div class="home-container">
-        <div class="home-info">
-            <div class="info-text">
-                <h2>Welcome</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint mollitia impedit soluta, nobis accusamus culpa nemo. Ipsam blanditiis vitae incidunt eum quisquam. Minus rerum deserunt provident quaerat quam, debitis unde perferendis repudiandae, explicabo dolorum facere quae, modi commodi repellendus repellat accusamus! Suscipit, laudantium voluptatum cum iure consectetur optio tenetur assumenda!.</p>
-                <a href="{% url 'about' %}" class="info-button">See more</a>
-            </div>
-            <div class="info-image">
-                <img src="https://img.freepik.com/premium-photo/large-solar-panel-is-mounted-metal-frame-grassy-field_604472-12474.jpg" alt="Descripción de la imagen">
-            </div>
+<div class="home-container">
+    <!-- Main Info Section -->
+    <div class="home-info">
+        <div class="info-text">
+            <h2>Driving a Sustainable Future with Solar Energy</h2>
+            <p>At SolarBF, we are committed to bringing clean, renewable energy solutions to homes and businesses around the world. Harness the power of the sun and join the movement toward a greener, more sustainable future.</p>
+            <a href="{% url 'about' %}" class="btn-custom btn-large btn-success">See more</a>
         </div>
-        <div class="home-prod">
-            <h2 class="section-title">Some of our products</h2>
-            <div class="products-grid">
-                {% for product in products %}
-                <div class="product-card">
-                    <div class="product-image">
-                        {% if product.image and product.image.url %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                        {% else %}
-                            <img src="{% static 'images/default.jpg' %}" alt="Default Image">
-                        {% endif %}
-                    </div>
-                    <div class="product-info">
-                        <h3>{{ product.name }}</h3>
-                        <p class="price">${{ product.price }}</p>
-                        <a href="{% url 'products'%}" class="info-button">See More</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+        <div class="info-image">
+            <img src="https://img.freepik.com/premium-photo/large-solar-panel-is-mounted-metal-frame-grassy-field_604472-12474.jpg" alt="Descripción de la imagen">
         </div>
-        <div class="home-com">
-            <h2 class="section-title">We have this brands</h2>
-            <div class="com-carousel">
-                <div class="com-track">
-                    <!-- Imágenes originales -->
-                    <div class="com-slide">
-                        <img src="{% static 'images/apsystems.png' %}" alt="img1">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/epsolar.png' %}" alt="img2">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/growatt.png' %}" alt="img3">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/hoymiles.png' %}" alt="img4">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/jasolar.jpg' %}" alt="img5">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/jntech.png' %}" alt="img6">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/solark.jpg' %}" alt="img7">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/sungrow.jpg' %}" alt="img8">
-                    </div>
-                    <!-- Duplicado de imágenes para el efecto infinito -->
-                    <div class="com-slide">
-                        <img src="{% static 'images/apsystems.png' %}" alt="img1">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/epsolar.png' %}" alt="img2">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/growatt.png' %}" alt="img3">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/hoymiles.png' %}" alt="img4">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/jasolar.jpg' %}" alt="img5">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/jntech.png' %}" alt="img6">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/solark.jpg' %}" alt="img7">
-                    </div>
-                    <div class="com-slide">
-                        <img src="{% static 'images/sungrow.jpg' %}" alt="img8">
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-    
+
+    <!-- Benefits Section -->
+    <div class="home-benefits">
+        <h2 class="section-title">Benefits of Solar Energy</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <h3>Renewable and Clean Energy</h3>
+                <p>Solar energy is an endless source of clean energy that reduces carbon footprint and protects our planet.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Cost Savings on Energy</h3>
+                <p>Over time, solar energy can significantly reduce electricity costs, providing a cost-effective and beneficial investment.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Energy Independence</h3>
+                <p>By using solar energy, you reduce reliance on traditional and non-renewable energy sources.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Low Maintenance</h3>
+                <p>Solar energy systems require minimal maintenance and can last for decades with proper care.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="home-why">
+        <h2>Why Choose SolarBF?</h2>
+        <p>SolarBF offers innovative solar energy solutions designed to maximize efficiency and energy savings. Our team of experts is dedicated to providing the best installation experience and technical support, ensuring our customers can enjoy the benefits of solar energy simply and accessibly.</p>
+        <a href="{% url 'products' %}" class="btn-custom btn-large btn-primary">Explore Our Products</a>
+    </div>
+
+    <!-- Products Section -->
+    <div class="home-prod">
+        <h2 class="section-title">Some of our products</h2>
+        <div class="cardb-list">
+            {% for product in products %}
+            <div class="cardb-item">
+                <div class="product-image">
+                    {% if product.image and product.image.url %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="Default Image">
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h2>{{ product.name }}</h2>
+                    <p>${{ product.price }}</p>
+                    <a href="{% url 'products'%}" class="btn-custom btn-medium btn-success">See More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Brands Carousel Section -->
+    <div class="home-com">
+        <h2 class="section-title">We have these brands</h2>
+        <div class="com-carousel">
+            <div class="com-track">
+                <div class="com-slide">
+                    <img src="{% static 'images/apsystems.png' %}" alt="img1">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/epsolar.png' %}" alt="img2">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/growatt.png' %}" alt="img3">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/hoymiles.png' %}" alt="img4">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/jasolar.jpg' %}" alt="img5">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/jntech.png' %}" alt="img6">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/solark.jpg' %}" alt="img7">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/sungrow.jpg' %}" alt="img8">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/apsystems.png' %}" alt="img1">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/epsolar.png' %}" alt="img2">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/growatt.png' %}" alt="img3">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/hoymiles.png' %}" alt="img4">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/jasolar.jpg' %}" alt="img5">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/jntech.png' %}" alt="img6">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/solark.jpg' %}" alt="img7">
+                </div>
+                <div class="com-slide">
+                    <img src="{% static 'images/sungrow.jpg' %}" alt="img8">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
 
-{% block scripts %}
 
+{% block scripts %}
 {% endblock %}

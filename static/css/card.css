@@ -24,15 +24,37 @@
 
 .cardb-item img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 20vh;
+    object-fit: contain;
 }
 
 /* Text */
+.cardb-item h1 {
+    font-size: 28px;
+    margin: 10px;
+    color: #2E7D31;
+    font-weight: bold;
+}
+
+.cardb-item h2 {
+    font-size: 24px;
+    margin: 10px;
+    color: #2E7D31;
+    font-weight: bold;
+}
+
 .cardb-item h3 {
     font-size: 20px;
-    margin-bottom: 10px;
-    color: #2E7D32;
+    margin: 10px;
+    color: #2E7D31;
+    font-weight: bold;
+}
+
+.cardb-item h4 {
+    font-size: 16px;
+    margin: 10px;
+    color: #2E7D31;
+    font-style: italic;
 }
 
 .cardb-item p {
