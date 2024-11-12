@@ -26,11 +26,11 @@
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
-            <p>Price: ${{ product.price }}</p>
-            <p>Stock: {{ product.stock }}</p>
-            <p>Category: {{ product.category.name }}</p>
+            <p><strong>Price:</strong> ${{ product.price }}</p>
+            <p><strong>Stock:</strong> {{ product.stock }}</p>
+            <p><strong>Category:</strong> {{ product.category.name }}</p>
             {% if user.is_staff %}
-            <button class="btn-custom btn-small btn-edit" data-toggle="modal" data-target="#editProductModal{{ product.id }}" title="Edit">
+            <button class="btn-custom btn-small btn-success" data-toggle="modal" data-target="#editProductModal{{ product.id }}" title="Edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
             <button class="btn-custom btn-small btn-danger" data-toggle="modal" data-target="#deleteProductModal{{ product.id }}" title="Delete">

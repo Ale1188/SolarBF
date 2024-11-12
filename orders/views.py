@@ -12,6 +12,7 @@ from django.views.decorators.http import require_POST
 @login_required
 def order_list(request):
     orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.all()
     return render(request, 'admin/orders.html', {
         'orders': orders,
         'status_choices': STATUS_CHOICES,
