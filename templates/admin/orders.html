@@ -14,9 +14,9 @@
         {% for order in orders %}
             <div class="cardb-item">
                 <h3>Order ID: {{ order.id }}</h3>
-                <p><strong>Date:</strong> {{ order.created_at }}</p>
-                <p><strong>Total:</strong> ${{ order.order_total }}</p>
-                <p><strong>Shipping Address:</strong><br> 
+                <p class="truncate-text"><strong>Date:</strong> {{ order.created_at }}</p>
+                <p class="truncate-text"><strong>Total:</strong> ${{ order.order_total }}</p>
+                <p class="truncate-text"><strong>Shipping Address:</strong><br> 
                     {{ order.shipping_address.address }}, {{ order.shipping_address.city }}, {{ order.shipping_address.state }} - {{ order.shipping_address.postal_code }}
                 </p>
                 <form action="{% url 'update_order_status' order.id %}" method="POST">

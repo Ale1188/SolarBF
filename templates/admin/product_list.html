@@ -25,10 +25,10 @@
         <div class="cardb-item">
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
             <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p><strong>Price:</strong> ${{ product.price }}</p>
-            <p><strong>Stock:</strong> {{ product.stock }}</p>
-            <p><strong>Category:</strong> {{ product.category.name }}</p>
+            <p class="truncate-text">{{ product.description }}</p>
+            <p class="truncate-text"><strong>Price:</strong> ${{ product.price }}</p>
+            <p class="truncate-text"><strong>Stock:</strong> {{ product.stock }}</p>
+            <p class="truncate-text"><strong>Category:</strong> {{ product.category.name }}</p>
             {% if user.is_staff %}
             <button class="btn-custom btn-small btn-success" data-toggle="modal" data-target="#editProductModal{{ product.id }}" title="Edit">
                 <i class="fa-solid fa-pen-to-square"></i>
