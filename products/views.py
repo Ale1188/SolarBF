@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from accounts.views import is_admin, is_staff
 import os
 
-@login_required(login_url='login')
+@login_required
 def product_view(request):
     products = Product.objects.all()
     return render(request, 'store/products.html', {'products': products})

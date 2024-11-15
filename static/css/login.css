@@ -1,5 +1,5 @@
 .login-container {
-    max-width: 400px;
+    width: 45vh;
     margin: 2rem auto;
     padding: 2rem;
     background: white;
@@ -8,6 +8,7 @@
 }
 
 .login-container h1 {
+    font-weight: bold;
     text-align: center;
     color: #333;
     margin-bottom: 2rem;
@@ -44,22 +45,6 @@
     border-color: #28a745;
     outline: none;
     box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
-}
-
-.login-container button {
-    background-color: #28a745;
-    color: white;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 1rem;
-}
-
-.login-container button:hover {
-    background-color: #218838;
 }
 
 .mt-3 {

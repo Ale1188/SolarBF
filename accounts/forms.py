@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm, SetPasswordForm
 from .models import CustomUser
+from django.utils.translation import gettext_lazy as _
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=60, required=True, help_text='Required')
@@ -9,6 +10,11 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = UserCreationForm.Meta.fields + ('username', 'first_name', 'last_name', 'email')
+        
+    def __init__(self, *args, **kwargs): # Remove help text to inputs.
+        super().__init__(*args, **kwargs)
+        for field_name in self.fields:
+            self.fields[field_name].help_text = None
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -30,3 +36,9 @@ class CustomUserChangeForm(UserChangeForm):
         if password == "":
             return None
         return password
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        label=_("Email"),
+        max_length=254,
+    )
