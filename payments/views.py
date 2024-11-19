@@ -96,8 +96,8 @@ def checkout(request):
                     'quantity': 1,
                 }],
                 mode='payment',
-                success_url=f'http://127.0.0.1:8000/checkout/success/?order_id={order.id}',
-                cancel_url=f'http://127.0.0.1:8000/checkout/cancel/?order_id={order.id}',
+                success_url=f'{settings.BASE_URL}/checkout/success/?order_id={order.id}',
+                cancel_url=f'{settings.BASE_URL}/checkout/cancel/?order_id={order.id}',
                 billing_address_collection='required',
             )
             return redirect(session.url, code=303)

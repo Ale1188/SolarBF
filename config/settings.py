@@ -43,6 +43,8 @@ DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.100', '.herokuapp.com']
 
+BASE_URL = os.getenv('solarbf-721cf6b069ac.herokuapp.com', 'http://127.0.0.1:8000')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -147,7 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
+# STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
